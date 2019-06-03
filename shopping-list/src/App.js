@@ -12,7 +12,8 @@ class App extends Component {
     };
 
     // this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleChange(event) {
@@ -20,21 +21,30 @@ class App extends Component {
     // alert (this.state.value);
   }
 
-  handleSubmit(event) {
+  addItem (event) {
       if(this._inputElement.value !== "") {
-        var newItem = {
+        let newItem = {
         text: this._inputElement.value
         };
-      }
 
       this.setState((myState) => {
         return {
           items: myState.items.concat(newItem)
         };
       });
+      }
+
+      // Clear the input after adding
+      this._inputElement.value = "";
+
       event.preventDefault();
   }
 
+  deleteItem(key) {
+    let filteredItems = this.state.items.filter(function(item) {
+        return (item.key !== key)});
+
+  }
   
   render () {
   return (
@@ -44,15 +54,15 @@ class App extends Component {
         <p>
           My Shopping List
         </p>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.addItem}>
           <input ref={(a) => this._inputElement = a}
-                        placeholder="enter task">
-           
+                        placeholder="enter item">    
           </input>
           <button type="submit">Add to Shopping list</button> 
         </form>
       </div>  
-      <ShoppingItems entries={this.state.items}/>
+      <ShoppingItems entries={this.state.items}
+                     delete = {this.deleteItem}/>
     </div>
   );
  }
