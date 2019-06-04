@@ -10,8 +10,8 @@ class ShoppingItems extends Component {
     }
 
     createList(item) {
-        console.log("item key: " + item.text);
-        return <li onClick={() => this.delete(item.text)} key={item.text}>
+        console.log("item key: " + item.id);
+        return <li onClick={() => this.delete(item.id)} key={item.id}>
                 {item.text} <button type="submit">Delete</button> </li>
     }
 

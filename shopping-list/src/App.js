@@ -9,6 +9,7 @@ class App extends Component {
 
     this.state = {
       items : [], 
+      id : 0
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -16,15 +17,11 @@ class App extends Component {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
-  handleChange(event) {
-    // this.setState({value: event.target.value});
-    // alert (this.state.value);
-  }
-
   addItem (event) {
       if(this._inputElement.value !== "") {
         let newItem = {
-        text: this._inputElement.value
+        text: this._inputElement.value,
+        id: this.state.id += 1 
         };
 
       this.setState((myState) => {
@@ -43,7 +40,7 @@ class App extends Component {
   deleteItem(key) {
     console.log(key + " is the delete key");
     let filteredItems = this.state.items.filter(function(item) {
-        return (item.text !== key)});
+        return (item.id !== key)});
 
     this.setState({
       items: filteredItems
