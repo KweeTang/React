@@ -41,9 +41,13 @@ class App extends Component {
   }
 
   deleteItem(key) {
+    console.log(key + " is the delete key");
     let filteredItems = this.state.items.filter(function(item) {
-        return (item.key !== key)});
+        return (item.text !== key)});
 
+    this.setState({
+      items: filteredItems
+    });
   }
   
   render () {

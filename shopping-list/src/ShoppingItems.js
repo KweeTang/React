@@ -3,21 +3,26 @@ import React, {Component} from 'react';
 class ShoppingItems extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
 
         this.createList = this.createList.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     createList(item) {
-        return <li onClick={() => this.delete(item.key)} key={item.key}>
-                {item.text} <button type="submit">delete</button>
-               </li>
+        console.log("item key: " + item.text);
+        return <li onClick={() => this.delete(item.text)} key={item.text}>
+                {item.text} <button type="submit">Delete</button> </li>
+    }
+
+    delete(key) {
+        this.props.delete(key);
     }
 
     render() {
         let shoppingEntries = this.props.entries;
-        let listItems = shoppingEntries.map(this.createList)
-
+        let listItems = shoppingEntries.map(this.createList);
+         
         return(
             <ul className="shopList">
                {listItems}   
